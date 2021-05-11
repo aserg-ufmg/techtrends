@@ -19,5 +19,5 @@ esbuild, Snowpack, TypeScript, webpack, Parcel, Rollup, SWC, Rome, Gulp, Browser
 Electron, Capacitor, React Native, Native Apps, Expo, Quasar, Ionic, NW.js, Cordova
 
 ## Synonyms
-Tag synonyms based on [Stack Overflow](https://stackoverflow.com/)
-For example,  The following tags will be remapped to `reactjs`: `react`, `react-jsx` and `react.js`.
+Tag synonyms based on [Stack Overflow](https://stackoverflow.com/tags/synonyms)
+For example, the following tags will be remapped to `reactjs`: `react`, `react-jsx` and `react.js`.
