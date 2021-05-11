@@ -2,6 +2,7 @@
 
 ## Technologies
 Based on [State of JS](https://2020.stateofjs.com/en-US/technologies/)
+
 ### JavaScript Flavors
 TypeScript, PureScript, Reason, Elm, ClojureScript
 ### Front-end Frameworks
@@ -16,3 +17,7 @@ Testing Library, Jest, Cypress, Playwright, Storybook, Puppeteer, Mocha, Jasmine
 esbuild, Snowpack, TypeScript, webpack, Parcel, Rollup, SWC, Rome, Gulp, Browserify
 ### Mobile & Desktop
 Electron, Capacitor, React Native, Native Apps, Expo, Quasar, Ionic, NW.js, Cordova
+
+## Synonyms
+Tag synonyms based on [Stack Overflow](https://stackoverflow.com/)
+For example,  The following tags will be remapped to `reactjs`: `react`, `react-jsx` and `react.js`.
