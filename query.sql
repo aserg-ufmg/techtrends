@@ -44,3 +44,31 @@ SET @Koa = ('koa');
 SET @Gatsby = ('gatsby', 'gatsbyjs'); -- Suggested synonym
 SET @Hapi = ('hapijs');
 SET @Meteor = ('meteor', 'meteorjs', 'meteor.js');
+
+-- Testing
+-- Testing Library, Jest, Cypress, Playwright, Storybook, Puppeteer, Mocha, Jasmine, AVA, WebdriverIO
+
+SET @TestingLibrary = ('testing-library');
+SET @Jest = ('jestjs', 'jest');
+SET @Cypress = ('cypress', 'cypressio');
+SET @Playwright = ('playwright');
+SET @Storybook = ('storybook');
+SET @Puppeteer = ('puppeteer');
+SET @Mocha = ('mocha.js', 'mocha');
+SET @Jasmine = ('jasmine');
+SET @AVA = ('ava');
+SET @WebdriverIO = ('webdriver-io');
+
+-- Build Tools
+-- esbuild, Snowpack, TypeScript, webpack, Parcel, Rollup, SWC, Rome, Gulp, Browserify
+
+SET @esbuild = ('esbuild');
+SET @Snowpack = ('snowpack');
+-- already setted SET @TypeScript = ('typescript', 'atscript');
+SET @webpack = ('webpack');
+SET @Parcel = ('parceljs');
+SET @Rollup = ('rollupjs'); -- potentially has questions in 'rollup' tag too, but mixed with SQL questions 
+-- SET @SWC = (''); I didn't find anything. Github project is here: https://github.com/swc-project/swc
+SET @Rome = ('romejs');
+SET @Gulp = ('gulp');
+SET @Browserify = ('browserify');
