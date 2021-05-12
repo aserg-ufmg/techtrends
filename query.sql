@@ -72,3 +72,15 @@ SET @Rollup = ('rollupjs'); -- potentially has questions in 'rollup' tag too, bu
 SET @Rome = ('romejs');
 SET @Gulp = ('gulp');
 SET @Browserify = ('browserify');
+
+-- Mobile & Desktop
+-- Electron, Capacitor, React Native, Native Apps, Expo, Quasar, Ionic, NW.js, Cordova
+SET @Electron = ('electron');
+SET @Capacitor = ('capacitor');
+SET @ReactNative = ('react-native');
+-- @NativeApps - The majority of mobile and desktop apps are still built with native languages like Java, Kotlin, Objective-C, or Swift.
+SET @Expo = ('expo');
+SET @Quasar = ('quasar-framework');
+SET @Ionic = ('ionic-framework', 'ionic');
+SET @NWjs = ('nwjs');
+SET @Cordova = ('cordova', 'apache-cordova');
