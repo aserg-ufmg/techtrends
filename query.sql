@@ -2,7 +2,6 @@
 DECLARE @CurrMonth INTEGER;
 SET @CurrMonth = 5;
 
-
 DECLARE @Languages TABLE(lang VARCHAR(30) collate SQL_Latin1_General_CP1_CS_AS)
 
 -- JavaScript Flavors
@@ -91,3 +90,12 @@ INSERT INTO @Languages VALUES ('typescript'), ('atscript'),
 ('ionic-framework'), ('ionic'),
 ('nwjs'),
 ('cordova'), ('apache-cordova')
+
+SELECT COUNT(*) as questions, 
+(@CurrMonth - DATEDIFF(month, CreationDate, CURRENT_TIMESTAMP)) as 'months',
+Tags.TagName FROM Tags 
+  INNER JOIN PostTags ON PostTags.TagId = Tags.id 
+  INNER JOIN Posts ON Posts.ParentId = PostTags.PostId
+WHERE TagName IN (SELECT lang from @Languages)
+GROUP BY TagName, (@CurrMonth - DATEDIFF(month, CreationDate, CURRENT_TIMESTAMP))
+ORDER BY questions DESC
