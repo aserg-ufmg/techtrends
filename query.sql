@@ -1,3 +1,7 @@
+-- Current month
+SET @CurrMonth = 5
+
+
 declare @languages table(lang varchar(30) collate SQL_Latin1_General_CP1_CS_AS)
 
 -- JavaScript Flavors
