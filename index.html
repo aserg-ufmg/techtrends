@@ -169,6 +169,40 @@
                     d["questions"] = parseInt(d.questions);
                 });
 
+                // Scale the range of the data
+                x.domain(d3.extent(data, function(d) { return d.months; }));
+                y.domain([0, d3.max(data, function(d) { return d.questions; })]);
+
+                // Group the entries by symbol
+                dataNest = Array.from(
+                    d3.group(data, d => d.TagName), ([key, value]) => ({key, value})
+                );
+            
+                // set the colour scale
+                var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+                // Loop through each symbol / key
+                dataNest.forEach(function(d,i) { 
+
+                    svg.append("path")
+                        .attr("class", "line")
+                        .style("stroke", function() { // Add the colours dynamically
+                            return d.color = color(i); })
+                        .attr("d", questionsline(d.value));
+
+                });
+
+                // Add the X Axis
+                svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+                // Add the Y Axis
+                svg.append("g")
+                .attr("class", "axis")
+                .call(d3.axisLeft(y));
+
             });
 
     </script>
