@@ -105,6 +105,17 @@
         "nwjs",
         "cordova", "apache-cordova"];
 
+        d3.csv("QueryResults.csv")
+            .then(function(data) {
+                data.forEach(function (d) {
+                    var date = new Date();
+                    var years = Math.floor(d.months/12);
+                    var months = d.months % 12;
+                    d["months"] = new Date(date.getFullYear() - years, date.getMonth() - months); // convert elapsed months to JS date
+                    d["questions"] = parseInt(d.questions);
+                });
+            })
+
     </script>
 
 </head>
