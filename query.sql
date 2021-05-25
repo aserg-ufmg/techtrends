@@ -94,4 +94,4 @@ Tags.TagName FROM Tags
   INNER JOIN Posts ON Posts.ParentId = PostTags.PostId
 WHERE TagName IN (SELECT lang from @Languages)
 GROUP BY TagName, (DATEDIFF(month, CreationDate, CURRENT_TIMESTAMP))
-ORDER BY questions DESC
+ORDER BY 'months' DESC
