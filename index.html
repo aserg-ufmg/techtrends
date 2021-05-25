@@ -54,13 +54,13 @@
 <body>
 
     <div class="topnav">
-        <a class="active">JavaScript Flavors</a>
-        <a>Front-end Frameworks</a>
-        <a>Data Layer</a>
-        <a>Back-end Frameworks</a>
-        <a>Testing</a>
-        <a>Build Tools</a>
-        <a>Mobile & Desktop</a>
+        <a class="active" onclick="changeSelectedGraph(flavors)">JavaScript Flavors</a>
+        <a onclick="changeSelectedGraph(frontFrameworks)">Front-end Frameworks</a>
+        <a onclick="changeSelectedGraph(dataLayers)">Data Layer</a>
+        <a onclick="changeSelectedGraph(backendFrameworks)">Back-end Frameworks</a>
+        <a onclick="changeSelectedGraph(testing)">Testing</a>
+        <a onclick="changeSelectedGraph(buildTools)">Build Tools</a>
+        <a onclick="changeSelectedGraph(mobileAndDesktop)">Mobile & Desktop</a>
       </div>      
 
     <h1>Hello World</h1>
@@ -135,6 +135,8 @@
         "nwjs",
         "cordova", "apache-cordova"];
 
+        var selected = flavors;
+
         // Set the dimensions of the canvas / graph
         var margin = {top: 30, right: 20, bottom: 30, left: 50},
             width = 600 - margin.left - margin.right,
@@ -177,6 +179,9 @@
         var csvData;
 
         function drawGraph() {
+
+            svg.selectAll("*").remove();
+            
             // Scale the range of the data
             x.domain(d3.extent(csvData, function(d) { return d.months; }));
             y.domain([0, d3.max(csvData, function(d) { return d.questions; })]);
@@ -192,11 +197,15 @@
             // Loop through each symbol / key
             dataNest.forEach(function(d,i) { 
 
-                svg.append("path")
-                    .attr("class", "line")
-                    .style("stroke", function() { // Add the colours dynamically
-                        return d.color = color(i); })
-                    .attr("d", questionsline(d.value));
+                if(selected.some(e => e == d.key)) {
+
+                    svg.append("path")
+                        .attr("class", "line")
+                        .style("stroke", function() { // Add the colours dynamically
+                            return d.color = color(i); })
+                        .attr("d", questionsline(d.value));
+
+                }
 
             });
 
@@ -210,6 +219,13 @@
             svg.append("g")
             .attr("class", "axis")
             .call(d3.axisLeft(y));
+        }
+
+        function changeSelectedGraph(op) {
+            if (op !== selected) {
+                selected = op;
+                drawGraph();
+            }
         }
 
     </script>
