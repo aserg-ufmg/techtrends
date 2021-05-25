@@ -145,8 +145,8 @@
 
         // Set the dimensions of the canvas / graph
         var margin = {top: 30, right: 20, bottom: 30, left: 50},
-            width = 600 - margin.left - margin.right,
-            height = 270 - margin.top - margin.bottom;
+            width = 1200 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
 
         // Set the ranges
         var x = d3.scaleTime().range([0, width]);  
@@ -209,7 +209,9 @@
             var color = d3.scaleOrdinal(d3.schemeCategory10);
 
             // Loop through each symbol / key
+            var j = 0;
             dataNest.forEach(function(d,i) { 
+                var size = 20;
 
                 if(selected.some(e => e == d.key)) {
 
@@ -219,6 +221,23 @@
                             return d.color = color(i); })
                         .attr("d", questionsline(d.value));
 
+                    svg.append("rect")
+                            .attr("x", 5)
+                            .attr("y", 5 + j*(size+5)) // 100 is where the first dot appears. 25 is the distance between dots
+                            .attr("width", size)
+                            .attr("height", size)
+                            .style("fill", d.color)
+
+                    // Add one dot in the legend for each name.
+                    svg.append("text")
+                            .attr("x", 5 + size*1.2)
+                            .attr("y", 5 + j*(size+5) + (size/2)) // 100 is where the first dot appears. 25 is the distance between dots
+                            .style("fill", d.color)
+                            .text(d.key)
+                            .attr("text-anchor", "left")
+                            .style("alignment-baseline", "middle")
+
+                    j++
                 }
 
             });
