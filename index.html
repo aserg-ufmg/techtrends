@@ -63,10 +63,16 @@
         <a onclick="changeSelectedGraph(mobileAndDesktop)">Mobile & Desktop</a>
       </div>      
 
-    <h1>Hello World</h1>
+    <br>
+    <input type="checkbox" id="keepScale" name="keepScale" onchange="changeSelectedGraph(changeScale)"
+         checked>
+    <label for="keepScale">Keep graph scale</label>
+    <br>
 
 
     <script>
+
+        var changeScale = "dumb_const";
 
         var flavors = ["typescript", "atscript", 
         "purescript", 
@@ -176,15 +182,23 @@
 
             });
 
-        var csvData;
+        var csvData, scale;
 
         function drawGraph() {
 
             svg.selectAll("*").remove();
-            
+
+            const cb = document.getElementById('keepScale');
+
             // Scale the range of the data
-            x.domain(d3.extent(csvData, function(d) { return d.months; }));
-            y.domain([0, d3.max(csvData, function(d) { return d.questions; })]);
+            if (cb.checked) {
+                x.domain(d3.extent(csvData, function(d) { return d.months; }));
+                y.domain([0, d3.max(csvData, function(d) { return d.questions; })]);
+            } else {
+                const filteredData = csvData.filter(obj => selected.some(e => e == obj.TagName));
+                x.domain(d3.extent(filteredData, function(d) { return d.months; }));
+                y.domain([0, d3.max(filteredData, function(d) { return d.questions; })]);
+            }
 
             // Group the entries by symbol
             dataNest = Array.from(
@@ -222,8 +236,9 @@
         }
 
         function changeSelectedGraph(op) {
-            if (op !== selected) {
-                selected = op;
+            if (op !== selected || op === changeScale) {
+                if (op !== changeScale)
+                    selected = op;
                 drawGraph();
             }
         }
