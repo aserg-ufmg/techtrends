@@ -114,7 +114,7 @@ function drawGraph() {
 
     svg.selectAll("*").remove();
 
-    const cb = document.getElementById('keepScale');
+    const cb = true;
 
     // Scale the range of the data
     if (cb.checked) {
