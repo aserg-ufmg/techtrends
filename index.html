@@ -144,7 +144,7 @@
         var selected = flavors;
 
         // Set the dimensions of the canvas / graph
-        var margin = {top: 30, right: 20, bottom: 30, left: 50},
+        var margin = {top: 30, right: 20, bottom: 30, left: 75},
             width = 1200 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
@@ -260,6 +260,16 @@
             svg.append("g")
             .attr("class", "axis")
             .call(d3.axisLeft(y));
+
+            // Add axis label
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Perguntas/mês");
+
         }
 
         function changeSelectedGraph(op) {
