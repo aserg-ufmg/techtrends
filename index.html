@@ -208,8 +208,16 @@
             // set the colour scale
             var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+            svg.append("text")
+                .attr("x", 5)
+                .attr("y", 16)
+                .style("fill", "black")
+                .text("Tag do StackOverflow")
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
+
             // Loop through each symbol / key
-            var j = 0;
+            var j = 1;
             dataNest.forEach(function(d,i) { 
                 var size = 20;
 
