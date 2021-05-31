@@ -70,7 +70,7 @@ var mobileAndDesktop = ["electron",
 var selected = flavors;
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 75},
+var margin = {top: 30, right: 20, bottom: 30, left: 100},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -84,7 +84,7 @@ var questionsline = d3.line()
     .y(function(d) { return y(d.questions); });
     
 // Adds the svg canvas
-var svg = d3.select("body")
+var svg = d3.select("div.image")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -151,6 +151,7 @@ function drawGraph() {
 
             svg.append("path")
                 .attr("class", "line")
+                .attr("fill","none")
                 .style("stroke", function() { // Add the colours dynamically
                     return d.color = color(i); })
                 .attr("d", questionsline(d.value));

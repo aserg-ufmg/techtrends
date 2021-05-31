@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://d3js.org/d3.v6.min.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -51,10 +52,10 @@
 				<!-- One -->
 					<section id="flavors" class="wrapper style2 spotlights">
 						<section>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="image" id="flavorsSvg"></div>
 							<div class="content">
 								<div class="inner">
-									<h2>Sed ipsum dolor</h2>
+									<h2>JavaScript Flavors</h2>
 									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
 									<ul class="actions">
 										<li><a href="generic.html" class="button">Learn more</a></li>
@@ -232,6 +233,8 @@
 			</footer>
 
 		<!-- Scripts -->
+			<script src="scripts.js"></script>
+
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
