@@ -91,7 +91,7 @@ function drawGraph() {
     for (let index = 0; index < categoriesArray.length; index++) {
 
         // Set the dimensions of the canvas / graph
-        var margin = {top: 30, right: 20, bottom: 30, left: 100},
+        var margin = {top: 30, right: 20, bottom: 30, left: 75},
         width = 1200 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -107,8 +107,7 @@ function drawGraph() {
         // Adds the svg canvas
         var svg = d3.select("#"+idArrays[index])
         .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("viewBox",`0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
         .append("g")
             .attr("transform", 
                 "translate(" + margin.left + "," + margin.top + ")");
@@ -166,6 +165,7 @@ function drawGraph() {
 
         lastValueArray.forEach(function(d, i) {
             var size = 20;
+            // Add one dot in the legend for each name.
             svg.append("rect")
                 .attr("x", 5)
                 .attr("y", 5 + (i+1)*(size+5)) // 100 is where the first dot appears. 25 is the distance between dots
@@ -173,10 +173,9 @@ function drawGraph() {
                 .attr("height", size)
                 .style("fill", d[2])
 
-             // Add one dot in the legend for each name.
             svg.append("text")
                 .attr("x", 5 + size*1.2)
-                .attr("y", 5 + (i+1)*(size+5) + (size/2)) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("y", 12 + (i+1)*(size+5) + (size/2))
                 .style("fill", d[2])
                 .text(d[0])
                 .attr("text-anchor", "left")
@@ -197,7 +196,7 @@ function drawGraph() {
         // Add axis label
         svg.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
+            .attr("y", 5 - margin.left)
             .attr("x", 0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
