@@ -1,5 +1,3 @@
-var changeScale = "dumb_const";
-
 var flavors = ["typescript", "atscript", 
 "purescript", 
 "reason", "reasonml", 
@@ -67,30 +65,8 @@ var mobileAndDesktop = ["electron",
 "nwjs",
 "cordova", "apache-cordova"];
 
-var selected = flavors;
-
-// Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 100},
-    width = 1200 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-// Set the ranges
-var x = d3.scaleTime().range([0, width]);  
-var y = d3.scaleLinear().range([height, 0]);
-
-// Define the line
-var questionsline = d3.line()    
-    .x(function(d) { return x(d.months); })
-    .y(function(d) { return y(d.questions); });
-    
-// Adds the svg canvas
-var svg = d3.select("div.image")
-    .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-        .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")");
+var categoriesArray = [flavors, frontFrameworks, dataLayers, backendFrameworks, testing, buildTools, mobileAndDesktop];
+var idArrays = ["flavorsSvg", "frontFrameworksSvg", "dataLayersSvg", "backendFrameworksSvg", "testingSvg", "buildToolsSvg", "mobileAndDesktopSvg"];
 
 
 d3.csv("ProcessedQueryResults.csv")
@@ -108,101 +84,118 @@ d3.csv("ProcessedQueryResults.csv")
 
     });
 
-var csvData, scale;
+var csvData;
 
 function drawGraph() {
 
-    svg.selectAll("*").remove();
+    for (let index = 0; index < categoriesArray.length; index++) {
 
-    const cb = true;
+        // Set the dimensions of the canvas / graph
+        var margin = {top: 30, right: 20, bottom: 30, left: 100},
+        width = 1200 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-    // Scale the range of the data
-    if (cb.checked) {
-        x.domain(d3.extent(csvData, function(d) { return d.months; }));
-        y.domain([0, d3.max(csvData, function(d) { return d.questions; })]);
-    } else {
-        const filteredData = csvData.filter(obj => selected.some(e => e == obj.TagName));
-        x.domain(d3.extent(filteredData, function(d) { return d.months; }));
-        y.domain([0, d3.max(filteredData, function(d) { return d.questions; })]);
-    }
+        // Set the ranges
+        var x = d3.scaleTime().range([0, width]);  
+        var y = d3.scaleLinear().range([height, 0]);
 
-    // Group the entries by symbol
-    dataNest = Array.from(
-        d3.group(csvData, d => d.TagName), ([key, value]) => ({key, value})
-    );
+        // Define the line
+        var questionsline = d3.line()    
+        .x(function(d) { return x(d.months); })
+        .y(function(d) { return y(d.questions); });
 
-    // set the colour scale
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+        // Adds the svg canvas
+        var svg = d3.select("#"+idArrays[index])
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform", 
+                "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.append("text")
-        .attr("x", 5)
-        .attr("y", 16)
-        .style("fill", "black")
-        .text("Tag do StackOverflow")
-        .attr("text-anchor", "left")
-        .style("alignment-baseline", "middle")
+        const cb = true;
 
-    // Loop through each symbol / key
-    var j = 1;
-    dataNest.forEach(function(d,i) { 
-        var size = 20;
-
-        if(selected.some(e => e == d.key)) {
-
-            svg.append("path")
-                .attr("class", "line")
-                .attr("fill","none")
-                .style("stroke", function() { // Add the colours dynamically
-                    return d.color = color(i); })
-                .attr("d", questionsline(d.value));
-
-            svg.append("rect")
-                    .attr("x", 5)
-                    .attr("y", 5 + j*(size+5)) // 100 is where the first dot appears. 25 is the distance between dots
-                    .attr("width", size)
-                    .attr("height", size)
-                    .style("fill", d.color)
-
-            // Add one dot in the legend for each name.
-            svg.append("text")
-                    .attr("x", 5 + size*1.2)
-                    .attr("y", 5 + j*(size+5) + (size/2)) // 100 is where the first dot appears. 25 is the distance between dots
-                    .style("fill", d.color)
-                    .text(d.key)
-                    .attr("text-anchor", "left")
-                    .style("alignment-baseline", "middle")
-
-            j++
+        // Scale the range of the data
+        if (cb.checked) {
+            x.domain(d3.extent(csvData, function(d) { return d.months; }));
+            y.domain([0, d3.max(csvData, function(d) { return d.questions; })]);
+        } else {
+            const filteredData = csvData.filter(obj => categoriesArray[index].some(e => e == obj.TagName));
+            x.domain(d3.extent(filteredData, function(d) { return d.months; }));
+            y.domain([0, d3.max(filteredData, function(d) { return d.questions; })]);
         }
 
-    });
+        // Group the entries by symbol
+        dataNest = Array.from(
+            d3.group(csvData, d => d.TagName), ([key, value]) => ({key, value})
+        );
 
-    // Add the X Axis
-    svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+        // set the colour scale
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    // Add the Y Axis
-    svg.append("g")
-            .attr("class", "axis")
-            .call(d3.axisLeft(y));
+        svg.append("text")
+            .attr("x", 5)
+            .attr("y", 16)
+            .style("fill", "black")
+            .text("Tag do StackOverflow")
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
 
-    // Add axis label
-    svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text("Perguntas/mês");
+        // Loop through each symbol / key
+        var j = 1;
+        dataNest.forEach(function(d,i) { 
+            var size = 20;
 
-}
+            if(categoriesArray[index].some(e => e == d.key)) {
 
-function changeSelectedGraph(op) {
-    if (op !== selected || op === changeScale) {
-        if (op !== changeScale)
-            selected = op;
-        drawGraph();
+                svg.append("path")
+                    .attr("class", "line")
+                    .attr("fill","none")
+                    .style("stroke", function() { // Add the colours dynamically
+                        return d.color = color(i); })
+                    .attr("d", questionsline(d.value));
+
+                svg.append("rect")
+                        .attr("x", 5)
+                        .attr("y", 5 + j*(size+5)) // 100 is where the first dot appears. 25 is the distance between dots
+                        .attr("width", size)
+                        .attr("height", size)
+                        .style("fill", d.color)
+
+                // Add one dot in the legend for each name.
+                svg.append("text")
+                        .attr("x", 5 + size*1.2)
+                        .attr("y", 5 + j*(size+5) + (size/2)) // 100 is where the first dot appears. 25 is the distance between dots
+                        .style("fill", d.color)
+                        .text(d.key)
+                        .attr("text-anchor", "left")
+                        .style("alignment-baseline", "middle")
+
+                j++
+            }
+
+        });
+
+        // Add the X Axis
+        svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+        // Add the Y Axis
+        svg.append("g")
+                .attr("class", "axis")
+                .call(d3.axisLeft(y));
+
+        // Add axis label
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Perguntas/mês");
+
     }
+
 }
