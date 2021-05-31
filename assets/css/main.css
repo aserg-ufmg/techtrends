@@ -3103,7 +3103,6 @@ input, select, textarea {
 
 				.spotlights > section > .image {
 					width: 100%;
-					height: 50vh;
 				}
 
 				.spotlights > section > .content {
@@ -3123,7 +3122,6 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			.spotlights > section > .image {
-				height: 50vh;
 				min-height: 15em;
 			}
 
@@ -3467,7 +3465,7 @@ input, select, textarea {
 /* Wrapper (main) */
 
 	#sidebar + #wrapper {
-		margin-left: 10em;
+		margin-left: 12em;
 	}
 
 		@media screen and (max-width: 1280px) {
