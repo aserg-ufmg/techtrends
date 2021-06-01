@@ -36,6 +36,14 @@ ol, ul {
 	list-style: none;
 }
 
+p.explanation {
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 16px;
+	margin-right: 0;
+	padding-bottom: 10px;
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -3036,7 +3044,7 @@ input, select, textarea {
 			}
 
 		.spotlights > section > .content {
-			padding: 4em 5em 2em 5em ;
+			padding: 2em 2em 2em 2em ;
 			display: -moz-flex;
 			display: -webkit-flex;
 			display: -ms-flex;
@@ -3049,7 +3057,7 @@ input, select, textarea {
 			-webkit-justify-content: center;
 			-ms-justify-content: center;
 			justify-content: center;
-			width: 50em;
+			width: 30em;
 			-ms-flex: 1;
 		}
 
