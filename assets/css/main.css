@@ -3057,7 +3057,7 @@ input, select, textarea {
 			-webkit-justify-content: center;
 			-ms-justify-content: center;
 			justify-content: center;
-			width: 30em;
+			width: 40em;
 			-ms-flex: 1;
 		}
 
