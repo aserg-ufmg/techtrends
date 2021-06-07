@@ -65,8 +65,8 @@ var mobileAndDesktop = ["electron",
 "nwjs",
 "cordova", "apache-cordova"];  
 
-var categoriesArray = [flavors, frontFrameworks, dataLayers, backendFrameworks, testing, buildTools, mobileAndDesktop];
-var idArrays = ["flavorsSvg", "frontFrameworksSvg", "dataLayersSvg", "backendFrameworksSvg", "testingSvg", "buildToolsSvg", "mobileAndDesktopSvg"];
+var categoriesArray = [frontFrameworks, dataLayers, backendFrameworks, testing, buildTools, mobileAndDesktop, flavors];
+var idArrays = ["frontFrameworksSvg", "dataLayersSvg", "backendFrameworksSvg", "testingSvg", "buildToolsSvg", "mobileAndDesktopSvg", "flavorsSvg"];
 
 
 d3.csv("ProcessedQueryResults.csv")
