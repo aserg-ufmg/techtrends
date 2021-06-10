@@ -3061,6 +3061,15 @@ input, select, textarea {
 			-ms-flex: 1;
 		}
 
+		.contentmobile { 
+			visibility: hidden;
+			max-width: 0;
+		}
+
+		.content {
+			visibility: visible;
+		}
+
 			.spotlights > section > .content > .inner {
 				-moz-transform: translateX(0) translateY(0);
 				-webkit-transform: translateX(0) translateY(0);
@@ -3105,6 +3114,32 @@ input, select, textarea {
 
 		@media screen and (max-width: 980px) {
 
+			.contentmobile { 
+				visibility: visible;
+				max-width: none;
+				padding: 2em 2em 2em 2em ;
+				display: -moz-flex;
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+				-moz-flex-direction: column;
+				-webkit-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
+				width: 40em;
+				-ms-flex: 1;
+			}
+
+			.content {
+				visibility: hidden;
+				max-height: 0;
+				padding: 0;
+			}
+
 			.spotlights > section {
 				display: block;
 			}
@@ -3134,6 +3169,10 @@ input, select, textarea {
 			}
 
 			.spotlights > section > .content {
+				padding: 0;
+			}
+
+			.spotlights > section > .contentmobile {
 				padding: 3em 2em 1em 2em ;
 			}
 
