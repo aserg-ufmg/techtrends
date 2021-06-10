@@ -136,7 +136,7 @@ function drawGraph() {
             .attr("x", 5)
             .attr("y", 16)
             .style("fill", "black")
-            .text("Tag do StackOverflow")
+            .text("StackOverflow Tag")
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
 
@@ -200,7 +200,7 @@ function drawGraph() {
             .attr("x", 0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Perguntas / mês");
+            .text("Questions / month");
 
     }
 
